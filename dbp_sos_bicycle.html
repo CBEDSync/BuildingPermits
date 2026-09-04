@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBP System of Systems — The Bicycle</title>
+<style>
+  :root{
+    --bg:#f5f7fa; --panel:#ffffff; --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --frame:#94a3b8;
+    --accent:#2563eb;
+    --shadow:0 1px 3px rgba(15,23,42,.08),0 8px 24px rgba(15,23,42,.06);
+    --radius:14px;
+  }
+  [data-theme="dark"]{
+    --bg:#0b1220; --panel:#111a2b; --ink:#e6edf7; --muted:#93a4bd; --line:#22304a; --frame:#64748b;
+    --shadow:0 1px 3px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  header.site{position:sticky;top:0;z-index:30;background:var(--panel);border-bottom:1px solid var(--line);padding:11px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:15px;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .theme-btn{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:36px;height:34px;cursor:pointer;font-size:15px}
+  .wrap{max-width:1400px;margin:0 auto;padding:22px 22px 60px}
+  .lead h1{font-size:24px;margin:0 0 5px;letter-spacing:-.4px}
+  .lead p{margin:0 0 16px;color:var(--muted);font-size:14.5px;max-width:1040px}
+  .layout{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+  @media(max-width:1000px){.layout{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:8px}
+  svg{width:100%;height:auto;display:block}
+  .part{cursor:pointer}
+  .part .hit{fill:transparent}
+  .co{transition:opacity .18s}
+  .dim{opacity:.28}
+  .callout{cursor:pointer}
+  .callout .cbox{fill:var(--panel);stroke-width:1.5}
+  .callout .cname{font-weight:800;font-size:12.5px}
+  .callout .crole{font-size:10.5px;fill:var(--muted)}
+  .callout .lead{stroke-width:1.6}
+  .tube{cursor:pointer;transition:opacity .18s,stroke-width .18s}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 16px;margin-bottom:16px}
+  .panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:0 0 10px}
+  .seg{display:flex;gap:6px;margin-bottom:10px}
+  .seg button{flex:1;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:7px;border-radius:8px}
+  .seg button.on{background:var(--accent);color:#fff;border-color:transparent}
+  .row{display:flex;align-items:center;gap:9px;width:100%;text-align:left;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--rc);border-radius:9px;padding:8px 10px;color:var(--ink);font-family:inherit;margin-bottom:5px}
+  .row:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+  .row.active{background:color-mix(in srgb,var(--rc) 10%,transparent)}
+  .row .nm{font-size:12.5px;font-weight:600;flex:1}
+  .row .ct{font-size:11px;color:var(--muted)}
+  .row.rel{border-left-style:dashed}
+  .detail .dt{display:inline-block;font-size:11px;font-weight:800;color:#fff;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+  .detail h3{margin:2px 0 6px;font-size:16px}
+  .detail p{margin:0 0 10px;font-size:13.5px;color:var(--muted)}
+  .detail .warn{font-size:12px;color:#b45309;background:color-mix(in srgb,#d97706 12%,transparent);border:1px solid color-mix(in srgb,#d97706 26%,transparent);border-radius:8px;padding:7px 10px;margin-bottom:10px}
+  .plist{display:flex;flex-direction:column;gap:8px;max-height:360px;overflow:auto}
+  .pp{font-size:12.5px;padding-left:11px;border-left:2px solid var(--line)}
+  .pp a{color:var(--ink);text-decoration:none;font-weight:600} .pp a:hover{text-decoration:underline}
+  .pp .m{color:var(--muted);font-size:11.5px}
+  .foot{margin-top:18px;font-size:12.5px;color:var(--muted);max-width:1050px}
+  .foot b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="brand"><span class="dot"></span>DBP · System of Systems — The Bicycle</div>
+  <button class="theme-btn" id="themeBtn" title="Toggle theme">◐</button>
+</header>
+<div class="wrap">
+  <div class="lead">
+    <h1>The DBP System of Systems, as a Bicycle</h1>
+    <p>Each <b>part</b> of the digital building permit is a component of the bike; the <b>frame tubes and chain</b> are the
+       relationships that connect them. A bike only rolls when every part is present and linked. Click a <b>part</b> or a
+       <b>link</b> to see what it does for the DBP and the papers behind it. This uses a <b>revised 6-part model</b> — see the note below.</p>
+  </div>
+  <div class="layout">
+    <div class="card"><svg id="bike" viewBox="0 0 1080 620" role="img" aria-label="DBP system of systems as a bicycle"></svg></div>
+    <div>
+      <div class="panel">
+        <div class="seg" id="seg"><button data-s="parts" class="on">Parts</button><button data-s="rels">Links</button></div>
+        <div id="plistParts"></div>
+        <div id="plistRels" style="display:none"></div>
+      </div>
+      <div class="panel detail" id="detail"></div>
+    </div>
+  </div>
+  <p class="foot"><b>Note on the parts:</b> a proposed re-grouping into six — <b>Data and Models</b> (pedals),
+     <b>Tools and Approaches</b> (drivetrain), <b>Regulations and Compliance</b> (rear wheel), <b>Governance and Processes</b> (front wheel),
+     <b>People and Capabilities</b> (rider) and <b>Purposes and Values</b> (steering). <b>Purposes and Values</b> is the handlebars — it <i>sets the
+     direction</i> the permit serves (sustainability, housing, productivity, wellbeing), and <b>Governance and Processes</b> is the front wheel
+     it steers. <b>People and Capabilities</b> (skills, training, staffing) is barely present in the corpus — only 3 of 57 DBP papers — a real blind spot.
+     The name “Purposes and Values” was previously “Purpose &amp; Collective Impact”.</p>
+</div>
+<script>
+const DATA={"parts":[{"id":"N1","name":"Data and Models","comp":"pedals","color":"#2563eb","role":"Feeds the system with structured, checkable applicant data — BIM/IFC models and the information requirements a submission must meet.","papers":["2-s2.0-105045332438","2-s2.0-105044681188","2-s2.0-105031586146","2-s2.0-105029522294","2-s2.0-85207915767","2-s2.0-85187799945","2-s2.0-85170034659","2-s2.0-85150634070","2-s2.0-85121129840","2-s2.0-85119956475","2-s2.0-84946781796"]},{"id":"N2","name":"Tools and Approaches","comp":"drivetrain","color":"#0d9488","role":"Connects the permit to the wider data estate — BIM, GIS, 3D city models, digital building logbooks (DBL), product passports (DPP), cadastre — through open standards.","papers":["2-s2.0-105045336274","2-s2.0-105029547864","2-s2.0-105045332438","2-s2.0-105045336044","2-s2.0-105041951470","2-s2.0-105045336527","2-s2.0-105045330749","2-s2.0-105045332333","2-s2.0-105028924455","2-s2.0-105045332822","2-s2.0-105031586146","2-s2.0-105045335616","2-s2.0-105029515427","2-s2.0-105020813707","2-s2.0-105016792954","2-s2.0-105029495525","2-s2.0-105023132188","2-s2.0-105029522294","2-s2.0-85207915767","2-s2.0-85187799945","2-s2.0-85194090902","2-s2.0-85203428548","2-s2.0-85212510016","2-s2.0-85209730992","2-s2.0-85144116318","2-s2.0-85132193879","2-s2.0-85126058899","2-s2.0-85136585978","2-s2.0-85137172604","2-s2.0-85119956475","2-s2.0-85092173438","2-s2.0-85048962158"]},{"id":"N3","name":"Regulations and Compliance","comp":"rearwheel","color":"#dc2626","role":"The driven wheel — turns regulation into decision through digitised rules, automated rule-checking and human/non-technical review.","papers":["2-s2.0-105045336274","2-s2.0-105042547666","2-s2.0-105045332438","2-s2.0-105033472635","2-s2.0-105045336044","2-s2.0-105041951470","2-s2.0-105030332840","2-s2.0-105044681188","2-s2.0-105045336527","2-s2.0-105045332333","2-s2.0-105028924455","2-s2.0-105004353621","2-s2.0-105020813707","2-s2.0-105029497540","2-s2.0-105022429926","2-s2.0-105016792954","2-s2.0-105029522294","2-s2.0-85195867528","2-s2.0-85207915767","2-s2.0-85187799945","2-s2.0-85194090902","2-s2.0-85212510016","2-s2.0-85170034659","2-s2.0-85149904406","2-s2.0-85144116318","2-s2.0-85132193879","2-s2.0-85126058899","2-s2.0-85121129840","2-s2.0-85092173438"]},{"id":"N4","name":"Governance and Processes","comp":"frontwheel","color":"#d97706","role":"The steered running-gear — institutions, legal basis, process, coordination and funding that carry the system forward in the direction its purpose sets.","papers":["2-s2.0-105035768413","2-s2.0-105042547666","2-s2.0-105045331349","2-s2.0-105033472635","2-s2.0-105027476390","2-s2.0-105044212806","2-s2.0-105045336044","2-s2.0-105045332333","2-s2.0-105045336585","2-s2.0-105045333638","2-s2.0-105020702816","2-s2.0-105029497540","2-s2.0-105023132188","2-s2.0-85175020767","2-s2.0-85150634070","2-s2.0-85149904406","2-s2.0-85144116318","2-s2.0-85126058899","2-s2.0-85136585978","2-s2.0-85092186924","2-s2.0-84946781796"]},{"id":"N5","name":"People and Capabilities","comp":"rider","color":"#7c3aed","role":"Powers and balances everything — the skills, training, staffing and digital literacy of the people who run it. (Under-researched in the corpus.)","papers":["2-s2.0-105033472635","2-s2.0-105023132188","2-s2.0-85092186924"]},{"id":"N6","name":"Purposes and Values","comp":"steering","color":"#16a34a","role":"Sets the direction — the wider ends the permit serves (sustainability, housing, productivity, wellbeing). The permit is not standalone; purpose steers the whole system.","papers":["2-s2.0-105029547864","2-s2.0-105035768413","2-s2.0-105045336044","2-s2.0-105045332822","2-s2.0-105045335616","2-s2.0-105004353621","2-s2.0-105016792954","2-s2.0-105023132188","2-s2.0-85194090902","2-s2.0-85203428548","2-s2.0-85209730992"]}],"rels":[{"a":"N1","b":"N2","tube":"chain","label":"submitted data flows into integration","papers":["2-s2.0-105045332438","2-s2.0-105031586146","2-s2.0-105029522294","2-s2.0-85207915767","2-s2.0-85187799945","2-s2.0-85119956475"]},{"a":"N2","b":"N3","tube":"chainStay","label":"integrated data drives the checking","papers":["2-s2.0-105045336274","2-s2.0-105045332438","2-s2.0-105045336044","2-s2.0-105041951470","2-s2.0-105045336527","2-s2.0-105045332333","2-s2.0-105028924455","2-s2.0-105020813707","2-s2.0-105016792954","2-s2.0-105029522294","2-s2.0-85207915767","2-s2.0-85187799945","2-s2.0-85194090902","2-s2.0-85212510016","2-s2.0-85144116318","2-s2.0-85132193879","2-s2.0-85126058899","2-s2.0-85092173438"]},{"a":"N5","b":"N3","tube":"seatStay","label":"people run the review & the checks","papers":["2-s2.0-105033472635"]},{"a":"N5","b":"N1","tube":"seatTube","label":"people prepare the submission","papers":[]},{"a":"N6","b":"N4","tube":"fork","label":"purpose steers governance & process","papers":["2-s2.0-105035768413","2-s2.0-105045336044","2-s2.0-105023132188"]},{"a":"N4","b":"N3","tube":"ground","label":"governance & checking keep it rolling","papers":["2-s2.0-105042547666","2-s2.0-105033472635","2-s2.0-105045336044","2-s2.0-105045332333","2-s2.0-105029497540","2-s2.0-85149904406","2-s2.0-85144116318","2-s2.0-85126058899"]},{"a":"N6","b":"N5","tube":"topTube","label":"purpose & people set the direction together","papers":["2-s2.0-105023132188"]},{"a":"N6","b":"N1","tube":"downTube","label":"purpose shapes what must be submitted","papers":[]}],"papers":{"2-s2.0-105045332822":{"t":"Sustainability in Building Permitting","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045332822?origin=resultslist"},"2-s2.0-105029522294":{"t":"EXTENSION OF THE INFORMATION DELIVERY SPECIFICATION FOR BIM-BASED CHECKING IN DATA-DRIVEN BUILDING PERMIT","y":2025,"j":"Proceedings of the European Conference on Computing in Construction","l":"https://www.scopus.com/pages/publications/105029522294?origin=resultslist"},"2-s2.0-105045336585":{"t":"Digital Transformation of Building Permitting","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045336585?origin=resultslist"},"2-s2.0-105044212806":{"t":"A validated framework for assessing digital building permit maturity","y":2026,"j":"Architectural Engineering and Design Management","l":"https://www.scopus.com/pages/publications/105044212806?origin=resultslist"},"2-s2.0-85195867528":{"t":"A blockchain-based engineering design review service trading scheme for digital building permits","y":2024,"j":"Automation in Construction","l":"https://www.scopus.com/pages/publications/85195867528?origin=resultslist"},"2-s2.0-105045336044":{"t":"Finland’s Digital Leap in Building Permits: Journey through Hands-on BIM-Piloting and Cross-sectoral Collaboration","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045336044?origin=resultslist"},"2-s2.0-105016792954":{"t":"Navigating the shift towards sustainable digital building permits and building logbooks","y":2025,"j":"Open Research Europe","l":"https://www.scopus.com/pages/publications/105016792954?origin=resultslist"},"2-s2.0-85209730992":{"t":"Twinning the path of digital building permits and digital building logbooks – Diagnosis and challenges","y":2024,"j":"Developments in the Built Environment","l":"https://www.scopus.com/pages/publications/85209730992?origin=resultslist"},"2-s2.0-105023132188":{"t":"Towards Digital Building Permits: a review of European strategies and relevant literature; [Digitalizzazione dei processi autorizzativi: strategie europee e letteratura internazionale]","y":2025,"j":"TECHNE","l":"https://www.scopus.com/pages/publications/105023132188?origin=resultslist"},"2-s2.0-105033472635":{"t":"Trusting the algorithm: transparency, information control and continuance intention in China's digital building permit systems","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105033472635?origin=resultslist"},"2-s2.0-85136585978":{"t":"Reviewing the literature on the tripartite cycle containing digital building permit, 3D city modeling, and 3D property ownership","y":2022,"j":"Land Use Policy","l":"https://www.scopus.com/pages/publications/85136585978?origin=resultslist"},"2-s2.0-85119956475":{"t":"A CONCEPTUAL MODEL for IFC-BASED DELINEATION of CONDOMINIUM RIGHTS in TURKEY: INITIAL EXPERIMENTS","y":2021,"j":"ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences","l":"https://www.scopus.com/pages/publications/85119956475?origin=resultslist"},"2-s2.0-105029547864":{"t":"Representing the Spatial Plans as 3D Standardized Geodatasets: Demonstrations From Sweden and Türkiye","y":2026,"j":"Transactions in GIS","l":"https://www.scopus.com/pages/publications/105029547864?origin=resultslist"},"2-s2.0-105044681188":{"t":"Development of openBIM based building code compliance checks: Case study in the City of Vienna","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105044681188?origin=resultslist"},"2-s2.0-85175020767":{"t":"Digital Transformation of Building Permits: Current Status, Maturity, and Future Prospects","y":2023,"j":"Buildings","l":"https://www.scopus.com/pages/publications/85175020767?origin=resultslist"},"2-s2.0-105045336274":{"t":"Data Profiling and Validation through Linked Data Technologies","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045336274?origin=resultslist"},"2-s2.0-85132193879":{"t":"GEOBIM INFORMATION TO CHECK DIGITAL BUILDING PERMIT REGULATIONS","y":2022,"j":"International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences - ISPRS Archives","l":"https://www.scopus.com/pages/publications/85132193879?origin=resultslist"},"2-s2.0-105045330749":{"t":"Interconnection of Digital Building Logbooks and Building Permits: Realisation, Common Data, and Added Value","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045330749?origin=resultslist"},"2-s2.0-85203428548":{"t":"DIGITAL BUILDING PERMITS AND DIGITAL BUILDING LOGBOOKS – CLUSTERING THE CHALLENGES AND REQUIREMENTS FOR ALIGNMENT","y":2024,"j":"Proceedings of the European Conference on Computing in Construction","l":"https://www.scopus.com/pages/publications/85203428548?origin=resultslist"},"2-s2.0-105031586146":{"t":"Definition of standardized GeoBIM information requirements for digital building permits","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105031586146?origin=resultslist"},"2-s2.0-105045332333":{"t":"Brazilian Scenario for Digital Building Permits: Initiatives from Pioneering Municipalities","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045332333?origin=resultslist"},"2-s2.0-85126058899":{"t":"Unveiling the actual progress of Digital Building Permit: Getting awareness through a critical state of the art review","y":2022,"j":"Building and Environment","l":"https://www.scopus.com/pages/publications/85126058899?origin=resultslist"},"2-s2.0-105029515427":{"t":"UNLOCKING DIGITAL BUILDING LOGBOOK IMPLEMENTATION-EXPLORING POTENTIAL CONTRIBUTIONS FROM THE REAL ESTATE SECTOR","y":2025,"j":"Proceedings of the European Conference on Computing in Construction","l":"https://www.scopus.com/pages/publications/105029515427?origin=resultslist"},"2-s2.0-85048962158":{"t":"Digital construction permit: A round trip between GIS and IFC","y":2018,"j":"Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)","l":"https://www.scopus.com/pages/publications/85048962158?origin=resultslist"},"2-s2.0-85170034659":{"t":"BIM features to enhance building permit process activity: A partial least squares structural equation modelling (PLS-SEM) approach","y":2023,"j":"E3S Web of Conferences","l":"https://www.scopus.com/pages/publications/85170034659?origin=resultslist"},"2-s2.0-105030332840":{"t":"Leveraging large language models for BIM-based automated compliance checking","y":2026,"j":"Automation in Construction","l":"https://www.scopus.com/pages/publications/105030332840?origin=resultslist"},"2-s2.0-105045331349":{"t":"Implementing Nationwide Public Service Software in Federal Systems: A Case Study of the ‘One for All’ Approach in Germany","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045331349?origin=resultslist"},"2-s2.0-85187799945":{"t":"An Open and Standards-Based Approach for the Digital Building Permit in Montevideo","y":2024,"j":"Lecture Notes in Business Information Processing","l":"https://www.scopus.com/pages/publications/85187799945?origin=resultslist"},"2-s2.0-105045335616":{"t":"Integrating 3D Geodata-Based Spatial Plans into 3D Land Administration for Digital Building Permits","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045335616?origin=resultslist"},"2-s2.0-105029497540":{"t":"LOST IN REGULATIONS: DIGITALIZATION AS THE KEY TO TRANSPARENT AND EFFICIENT BUILDING PERMIT EVALUATION IN ESTONIA","y":2025,"j":"Proceedings of the European Conference on Computing in Construction","l":"https://www.scopus.com/pages/publications/105029497540?origin=resultslist"},"2-s2.0-85149904406":{"t":"The Adoption of Automated Building Code Compliance Checking Systems in the Architecture, Engineering, and Construction Industry","y":2023,"j":"2023 International Conference on Cyber Management and Engineering, CyMaEn 2023","l":"https://www.scopus.com/pages/publications/85149904406?origin=resultslist"},"2-s2.0-85144116318":{"t":"Code Checking using BIM for Digital Building Permit: A case study in a Brazilian municipality","y":2022,"j":"IOP Conference Series: Earth and Environmental Science","l":"https://www.scopus.com/pages/publications/85144116318?origin=resultslist"},"2-s2.0-85212510016":{"t":"Profiling Standards to Improve Practical Interoperability","y":2024,"j":"International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences - ISPRS Archives","l":"https://www.scopus.com/pages/publications/85212510016?origin=resultslist"},"2-s2.0-105045333638":{"t":"Maturity Models for Digital Building Permits","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045333638?origin=resultslist"},"2-s2.0-105020702816":{"t":"Coordination mechanisms in digital building permitting: unravelling the dynamic tension between collaboration and complexity","y":2025,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105020702816?origin=resultslist"},"2-s2.0-85092173438":{"t":"Geobim for digital building permit process: Learning from a case study in Rotterdam","y":2020,"j":"ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences","l":"https://www.scopus.com/pages/publications/85092173438?origin=resultslist"},"2-s2.0-105045332438":{"t":"Digital Building Permit Service at the Municipality of Rotterdam","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045332438?origin=resultslist"},"2-s2.0-85207915767":{"t":"Extending Information Delivery Specifications for digital building permit requirements","y":2024,"j":"Developments in the Built Environment","l":"https://www.scopus.com/pages/publications/85207915767?origin=resultslist"},"2-s2.0-105004353621":{"t":"OntoBPR: An ontology-based framework for performing building permit reviews using standardized information containers","y":2025,"j":"Advanced Engineering Informatics","l":"https://www.scopus.com/pages/publications/105004353621?origin=resultslist"},"2-s2.0-105020813707":{"t":"Prioritising Categories of Controls for Their Automated Check in a Digitalised Building Permit Process in Europe: Insights from a Survey Study","y":2025,"j":"Lecture Notes in Civil Engineering","l":"https://www.scopus.com/pages/publications/105020813707?origin=resultslist"},"2-s2.0-105035768413":{"t":"Understanding the Saudi Arabia planning permit process: a comparative analysis with European countries","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105035768413?origin=resultslist"},"2-s2.0-85137172604":{"t":"THE ROLE OF OPEN STANDARDS IN DIGITAL BUILDING PERMITTING, 3D REGISTRATION OF CONDOMINIUM, AND UPDATE OF 3D CITY MODELS","y":2022,"j":"International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences - ISPRS Archives","l":"https://www.scopus.com/pages/publications/85137172604?origin=resultslist"},"2-s2.0-105029495525":{"t":"BRIDGING SCALES IN DIGITAL URBANISM: POLICAD’S ROLE IN ENHANCING BIM-GIS INTEROPERABILITY FOR SMART URBAN MANAGEMENT","y":2025,"j":"Proceedings of the European Conference on Computing in Construction","l":"https://www.scopus.com/pages/publications/105029495525?origin=resultslist"},"2-s2.0-105041951470":{"t":"Integrating BIM and GIS through spatial planning information modelling","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105041951470?origin=resultslist"},"2-s2.0-85121129840":{"t":"IFC models for semi-automating common planning checks for building permits","y":2022,"j":"Automation in Construction","l":"https://www.scopus.com/pages/publications/85121129840?origin=resultslist"},"2-s2.0-105045336527":{"t":"Semantic Web Technologies for Building Permitting","y":2026,"j":"Digital Transformation of Building Permitting","l":"https://www.scopus.com/pages/publications/105045336527?origin=resultslist"},"2-s2.0-105028924455":{"t":"GREEN SPACE INTEGRATION IN MIXED-USE DEVELOPMENTS: GAR AND SOUND CALCULATOR APPLICATIONS FOR BANGKOK’S URBAN COMMUNITIES","y":2026,"j":"ICIC Express Letters, Part B: Applications","l":"https://www.scopus.com/pages/publications/105028924455?origin=resultslist"},"2-s2.0-105042547666":{"t":"Institutionalizing automated compliance checking (ACC): a cross-context analysis of implementations in Europe","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105042547666?origin=resultslist"},"2-s2.0-105022429926":{"t":"Augmented reality supported hearings: a case study on the openBIM-based building permit process in Vienna, Austria","y":2025,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105022429926?origin=resultslist"},"2-s2.0-85092186924":{"t":"INTEGRATING EXPERTISES and AMBITIONS for DATA-DRIVEN DIGITAL BUILDING PERMITS - The EUNET4DBP","y":2020,"j":"International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences - ISPRS Archives","l":"https://www.scopus.com/pages/publications/85092186924?origin=resultslist"},"2-s2.0-84946781796":{"t":"Digital building permit application: A feasibility study for a shared services solution in the Netherlands","y":2004,"j":"Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)","l":"https://www.scopus.com/pages/publications/84946781796?origin=resultslist"},"2-s2.0-85194090902":{"t":"Sustainability in the Context of BIM-Enabled Digital Building Permits","y":2024,"j":"Lecture Notes in Civil Engineering","l":"https://www.scopus.com/pages/publications/85194090902?origin=resultslist"},"2-s2.0-105027476390":{"t":"Developing a reference building permit process model","y":2026,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/105027476390?origin=resultslist"},"2-s2.0-85150634070":{"t":"Understanding processes on digital building permits–a case study in South Tyrol","y":2023,"j":"Building Research and Information","l":"https://www.scopus.com/pages/publications/85150634070?origin=resultslist"}}};
+const PARTS=DATA.parts, RELS=DATA.rels, PL=DATA.papers;
+const PBY={}; PARTS.forEach(p=>PBY[p.id]=p);
+const NS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("bike");
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function cv(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+
+// geometry
+const REAR=[300,410], FRONT=[770,410], WR=96, BB=[512,425], SEAT=[420,210], HEAD=[700,225], HEADB=[715,258];
+const TUBES={
+  seatTube:[BB,SEAT], downTube:[BB,HEAD], topTube:[SEAT,[HEAD[0]-3,HEAD[1]-3]],
+  chainStay:[BB,REAR], seatStay:[[SEAT[0]+2,SEAT[1]+6],REAR], fork:[HEADB,FRONT], headTube:[HEAD,HEADB]
+};
+// which rel highlights which tube/chain
+const REL_TUBE={ "N1|N2":"chain","N2|N3":"chainStay","N4|N1":"downTube","N4|N5":"topTube","N5|N3":"seatStay","N3|N6":"ground","N4|N3":"headTube","N2|N6":"fork" };
+// callout anchor points + label boxes
+const CALL={
+  N5:{lab:[150,90],lw:210,to:[SEAT[0],SEAT[1]-6],short:"Powers it — the people"},
+  N4:{lab:[860,440],lw:210,to:[FRONT[0]+70,FRONT[1]-40],short:"Carries it forward"},
+  N1:{lab:[430,560],lw:210,to:[BB[0],BB[1]+34],short:"Puts the data in"},
+  N2:{lab:[120,540],lw:210,to:[400,418],short:"Connects everything"},
+  N3:{lab:[70,430],lw:200,to:[REAR[0]-70,REAR[1]-40],short:"Turns rules into decisions"},
+  N6:{lab:[820,120],lw:230,to:HEAD,short:"Sets the direction"},
+};
+let tubeEls={}, partEls={}, sel=null;
+
+function draw(){
+  svg.innerHTML="";
+  const frame=cv('--frame'), muted=cv('--muted'), panel=cv('--panel'), ink=cv('--ink');
+  // ground line (rel N3|N6)
+  const g=el("g",{}); svg.appendChild(g);
+  const ground=el("line",{class:"tube",x1:REAR[0],y1:REAR[1]+WR+6,x2:FRONT[0],y2:FRONT[1]+WR+6,stroke:frame,"stroke-width":3,"stroke-dasharray":"3 8",opacity:.5,"data-tube":"ground"});
+  g.appendChild(ground); tubeEls.ground=ground;
+  // frame tubes
+  for(const k in TUBES){ const [a,b]=TUBES[k];
+    const t=el("line",{class:"tube",x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:frame,"stroke-width":8,"stroke-linecap":"round","data-tube":k});
+    g.appendChild(t); tubeEls[k]=t; t.addEventListener("click",e=>{e.stopPropagation();selTubeRel(k);}); }
+  ground.addEventListener("click",e=>{e.stopPropagation();selTubeRel("ground");});
+
+  // ---- PART components ----
+  function part(id,build){ const p=el("g",{class:"part co","data-id":id}); build(p); p.addEventListener("click",e=>{e.stopPropagation();selectPart(id);}); svg.appendChild(p); partEls[id]=p; return p; }
+  const C=id=>PBY[id].color;
+  // N3 rear wheel
+  part("N3",p=>{ p.appendChild(el("circle",{cx:REAR[0],cy:REAR[1],r:WR,fill:"none",stroke:C("N3"),"stroke-width":8}));
+    p.appendChild(el("circle",{cx:REAR[0],cy:REAR[1],r:WR-11,fill:"none",stroke:C("N3"),"stroke-width":1.5,opacity:.4}));
+    for(let i=0;i<8;i++){const an=i*Math.PI/4;p.appendChild(el("line",{x1:REAR[0],y1:REAR[1],x2:REAR[0]+Math.cos(an)*(WR-2),y2:REAR[1]+Math.sin(an)*(WR-2),stroke:C("N3"),"stroke-width":1,opacity:.35}));}
+    p.appendChild(el("circle",{cx:REAR[0],cy:REAR[1],r:7,fill:C("N3")}));
+    p.appendChild(el("circle",{class:"hit",cx:REAR[0],cy:REAR[1],r:WR})); });
+  // N4 front wheel (Governance and Processes — the steered running-gear)
+  part("N4",p=>{ p.appendChild(el("circle",{cx:FRONT[0],cy:FRONT[1],r:WR,fill:"none",stroke:C("N4"),"stroke-width":8}));
+    p.appendChild(el("circle",{cx:FRONT[0],cy:FRONT[1],r:WR-11,fill:"none",stroke:C("N4"),"stroke-width":1.5,opacity:.4}));
+    for(let i=0;i<8;i++){const an=i*Math.PI/4;p.appendChild(el("line",{x1:FRONT[0],y1:FRONT[1],x2:FRONT[0]+Math.cos(an)*(WR-2),y2:FRONT[1]+Math.sin(an)*(WR-2),stroke:C("N4"),"stroke-width":1,opacity:.35}));}
+    p.appendChild(el("circle",{cx:FRONT[0],cy:FRONT[1],r:7,fill:C("N4")}));
+    p.appendChild(el("circle",{class:"hit",cx:FRONT[0],cy:FRONT[1],r:WR})); });
+  // N2 drivetrain (chainring + chain + cassette)
+  part("N2",p=>{
+    p.appendChild(el("line",{x1:BB[0],y1:BB[1]-16,x2:REAR[0],y2:REAR[1]-9,stroke:C("N2"),"stroke-width":3}));
+    p.appendChild(el("line",{x1:BB[0],y1:BB[1]+16,x2:REAR[0],y2:REAR[1]+9,stroke:C("N2"),"stroke-width":3}));
+    p.appendChild(el("circle",{cx:BB[0],cy:BB[1],r:19,fill:"none",stroke:C("N2"),"stroke-width":4}));
+    p.appendChild(el("circle",{cx:REAR[0],cy:REAR[1],r:11,fill:"none",stroke:C("N2"),"stroke-width":3}));
+    p.appendChild(el("circle",{class:"hit",cx:(BB[0]+REAR[0])/2,cy:(BB[1]+REAR[1])/2,r:40})); });
+  // N1 pedals + crank
+  part("N1",p=>{
+    p.appendChild(el("line",{x1:BB[0],y1:BB[1],x2:BB[0]-6,y2:BB[1]+42,stroke:C("N1"),"stroke-width":6,"stroke-linecap":"round"}));
+    p.appendChild(el("rect",{x:BB[0]-24,y:BB[1]+42,width:36,height:8,rx:3,fill:C("N1")}));
+    p.appendChild(el("circle",{cx:BB[0],cy:BB[1],r:6,fill:C("N1")}));
+    p.appendChild(el("circle",{class:"hit",cx:BB[0]-6,cy:BB[1]+30,r:34})); });
+  // N6 handlebars / steering (Purposes and Values — sets the direction)
+  part("N6",p=>{
+    p.appendChild(el("line",{x1:HEAD[0],y1:HEAD[1],x2:HEAD[0]+6,y2:HEAD[1]-30,stroke:C("N6"),"stroke-width":6,"stroke-linecap":"round"}));
+    p.appendChild(el("path",{d:`M${HEAD[0]-26},${HEAD[1]-34} q32,-14 60,4`,fill:"none",stroke:C("N6"),"stroke-width":6,"stroke-linecap":"round"}));
+    p.appendChild(el("circle",{class:"hit",cx:HEAD[0]+6,cy:HEAD[1]-24,r:34})); });
+  // N5 saddle + seatpost
+  part("N5",p=>{
+    p.appendChild(el("line",{x1:SEAT[0],y1:SEAT[1]+8,x2:SEAT[0],y2:SEAT[1]-14,stroke:C("N5"),"stroke-width":6,"stroke-linecap":"round"}));
+    p.appendChild(el("path",{d:`M${SEAT[0]-30},${SEAT[1]-16} q30,-12 58,-2 q-6,8 -30,8 q-18,0 -28,-6`,fill:C("N5")}));
+    p.appendChild(el("circle",{class:"hit",cx:SEAT[0],cy:SEAT[1]-16,r:30})); });
+
+  // ---- callouts ----
+  const gc=el("g",{}); svg.appendChild(gc);
+  for(const id in CALL){ const c=CALL[id], col=PBY[id].color;
+    const gg=el("g",{class:"callout co","data-id":id});
+    gg.appendChild(el("line",{class:"lead",x1:c.lab[0]+c.lw/2,y1:c.lab[1]+20,x2:c.to[0],y2:c.to[1],stroke:col,opacity:.7}));
+    gg.appendChild(el("circle",{cx:c.to[0],cy:c.to[1],r:4,fill:col}));
+    gg.appendChild(el("rect",{class:"cbox",x:c.lab[0],y:c.lab[1],width:c.lw,height:40,rx:9,stroke:col}));
+    const t1=el("text",{class:"cname",x:c.lab[0]+11,y:c.lab[1]+17,fill:col});t1.textContent=PBY[id].name;gg.appendChild(t1);
+    const t2=el("text",{class:"crole",x:c.lab[0]+11,y:c.lab[1]+32});t2.textContent=c.short;gg.appendChild(t2);
+    gg.addEventListener("click",e=>{e.stopPropagation();selectPart(id);});
+    gc.appendChild(gg); partEls[id+"_call"]=gg;
+  }
+  svg.addEventListener("click",()=>clearSel());
+  clearSel();
+}
+function setDim(activeParts,activeTube){
+  PARTS.forEach(p=>{ const on=!activeParts||activeParts.has(p.id);
+    partEls[p.id].classList.toggle("dim",!on); if(partEls[p.id+"_call"])partEls[p.id+"_call"].classList.toggle("dim",!on); });
+  for(const k in tubeEls){ tubeEls[k].classList.toggle("dim", activeTube!==undefined && k!==activeTube);
+    tubeEls[k].setAttribute("stroke-width", k===activeTube?(k==="ground"?4:11):(k==="chainStay"||k==="chain"?8:8)); }
+}
+function paperRows(eids){ if(!eids||!eids.length) return '<span style="color:var(--muted);font-size:12.5px">No papers mapped.</span>';
+  return '<div class="plist">'+eids.map(e=>{const p=PL[e];if(!p)return"";const t=p.l?`<a href="${p.l}" target="_blank" rel="noopener">${p.t}</a>`:`<b>${p.t}</b>`;return `<div class="pp">${t}<div class="m">${p.y||''}${p.j?' · '+p.j:''}</div></div>`;}).join("")+'</div>'; }
+function selectPart(id){ sel={t:"part",id}; const s=new Set([id]); setDim(s,null);
+  document.querySelectorAll("#plistParts .row").forEach(r=>r.classList.toggle("active",r.dataset.id===id));
+  document.querySelectorAll("#plistRels .row").forEach(r=>r.classList.remove("active"));
+  const p=PBY[id];
+  document.getElementById("detail").innerHTML=`<span class="dt" style="background:${p.color}">PART</span>
+    <h3>${p.name}</h3><p>${p.role}</p>
+    ${id==="N5"?'<div class="warn">⚠ Under-researched: only 3 of 57 DBP papers substantially address people, skills or training.</div>':''}
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:6px">${p.papers.length} related paper${p.papers.length===1?'':'s'}</div>
+    ${paperRows(p.papers)}`;
+}
+function selTubeRel(tube){ const r=RELS.find(x=>x.tube===tube); if(r) selectRel(r);}
+function selectRel(r){ sel={t:"rel",id:r.a+"|"+r.b}; const s=new Set([r.a,r.b]); setDim(s,r.tube);
+  document.querySelectorAll("#plistRels .row").forEach(row=>row.classList.toggle("active",row.dataset.id===r.a+"|"+r.b));
+  document.querySelectorAll("#plistParts .row").forEach(row=>row.classList.remove("active"));
+  document.getElementById("detail").innerHTML=`<span class="dt" style="background:var(--frame);color:#fff">LINK</span>
+    <h3 style="font-size:15px">${PBY[r.a].name} <span style="color:var(--muted)">↔</span> ${PBY[r.b].name}</h3>
+    <p>${r.label}.</p>
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:6px">${r.papers.length} paper${r.papers.length===1?'':'s'} span both</div>
+    ${paperRows(r.papers)}`;
+}
+function clearSel(){ sel=null; setDim(null,undefined);
+  document.querySelectorAll(".row").forEach(r=>r.classList.remove("active"));
+  document.getElementById("detail").innerHTML=`<h3 style="font-size:15px;margin:0 0 6px">Pick a part or a link</h3>
+    <p style="margin:0;color:var(--muted);font-size:13px">Click any component of the bike (a part) or a frame tube / the chain (a link) to see what it does for the DBP and the papers behind it.</p>`;
+}
+function buildLists(){
+  const pp=document.getElementById("plistParts"); pp.innerHTML="";
+  PARTS.forEach(p=>{ const b=document.createElement("button"); b.className="row"; b.dataset.id=p.id; b.style.setProperty("--rc",p.color);
+    b.innerHTML=`<span style="width:11px;height:11px;border-radius:50%;background:${p.color};flex:none"></span><span class="nm">${p.name}</span><span class="ct">${p.papers.length}p</span>`;
+    b.onclick=()=>selectPart(p.id); pp.appendChild(b); });
+  const pr=document.getElementById("plistRels"); pr.innerHTML="";
+  RELS.forEach(r=>{ const b=document.createElement("button"); b.className="row rel"; b.dataset.id=r.a+"|"+r.b; b.style.setProperty("--rc",cv('--frame'));
+    b.innerHTML=`<span class="nm">${PBY[r.a].name.split(' ')[0]} ↔ ${PBY[r.b].name.split(' ')[0]}</span><span class="ct">${r.papers.length}p</span>`;
+    b.onclick=()=>selectRel(r); pr.appendChild(b); });
+}
+document.querySelectorAll("#seg button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#seg button").forEach(x=>x.classList.toggle("on",x===b));
+  document.getElementById("plistParts").style.display=b.dataset.s==="parts"?"":"none";
+  document.getElementById("plistRels").style.display=b.dataset.s==="rels"?"":"none";});
+document.getElementById("themeBtn").onclick=()=>{const c=document.documentElement.getAttribute("data-theme");document.documentElement.setAttribute("data-theme",c==="dark"?"":"dark");draw();};
+buildLists(); draw();
+</script>
+</body>
+</html>

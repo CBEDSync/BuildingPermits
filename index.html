@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Building Permits — System-of-Systems Toolkit</title>
+<style>
+  :root{--bg:#f5f7fa;--panel:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;--accent:#2563eb;
+    --shadow:0 1px 3px rgba(15,23,42,.08),0 10px 30px rgba(15,23,42,.06);}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0b1220;--panel:#111a2b;--ink:#e6edf7;--muted:#93a4bd;--line:#22304a;--shadow:0 1px 3px rgba(0,0,0,.4),0 12px 34px rgba(0,0,0,.35);}}
+  :root[data-theme="dark"]{--bg:#0b1220;--panel:#111a2b;--ink:#e6edf7;--muted:#93a4bd;--line:#22304a;--shadow:0 1px 3px rgba(0,0,0,.4),0 12px 34px rgba(0,0,0,.35);}
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:48px 24px 70px}
+  .top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .kicker{font-size:12.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:32px;letter-spacing:-.6px;margin:6px 0 10px}
+  .lede{font-size:16px;color:var(--muted);max-width:680px;margin:0 0 30px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px 22px 20px;transition:transform .15s,box-shadow .15s,border-color .15s}
+  .card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:0 6px 16px rgba(37,99,235,.12),0 18px 40px rgba(15,23,42,.10)}
+  .card .ic{font-size:26px;margin-bottom:10px}
+  .card h2{font-size:18px;margin:0 0 6px}
+  .card p{font-size:13.5px;color:var(--muted);margin:0 0 12px}
+  .card .go{font-size:13px;font-weight:700;color:var(--accent)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px}
+  .tag{font-size:11px;font-weight:600;color:var(--muted);background:color-mix(in srgb,var(--ink) 6%,transparent);border-radius:20px;padding:2px 9px}
+  .full{grid-column:1/-1}
+  .dl{display:flex;align-items:center;gap:14px}
+  .dl .ic{margin:0;font-size:30px}
+  .foot{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  .foot b{color:var(--ink)}
+  .themebtn{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:38px;height:34px;cursor:pointer;font-size:15px}
+  .stat{display:inline-flex;gap:5px;align-items:baseline;margin-right:16px}
+  .stat b{font-size:18px;color:var(--ink)} .stat span{font-size:12.5px;color:var(--muted)}
+  .stats{margin:0 0 30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="dot"></span><span class="kicker">Digital Building Permits</span>
+    <button class="themebtn" id="themeBtn" title="Toggle light / dark">◐</button>
+  </div>
+  <h1>Digital Building Permits — a System-of-Systems Toolkit</h1>
+  <p class="lede">Interactive tools for understanding the digital building permit (DBP) as a <b>system of systems</b> — its six
+     parts, the types of methods within each, how they connect, and the research literature behind them.</p>
+
+  <div class="stats">
+    <span class="stat"><b>443</b> <span>papers</span></span>
+    <span class="stat"><b>6</b> <span>parts</span></span>
+    <span class="stat"><b>42</b> <span>types</span></span>
+    <span class="stat"><b>1978–2026</b> <span>span</span></span>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="dbp_sos_framework.html">
+      <div class="ic">🧩</div>
+      <h2>System-of-Systems Framework</h2>
+      <div class="tags"><span class="tag">Concept</span><span class="tag">The Parts</span><span class="tag">Relationships</span><span class="tag">Type Graph</span><span class="tag">Bicycle</span></div>
+      <p>The six parts of a DBP, the types of approach within each (with requirements, solutions, enablers and challenges), how the parts relate, an interactive type-to-type network, and the bicycle metaphor.</p>
+      <span class="go">Open the framework →</span>
+    </a>
+
+    <a class="card" href="dbp_literature_explorer.html">
+      <div class="ic">📊</div>
+      <h2>Literature Explorer</h2>
+      <div class="tags"><span class="tag">Dashboard</span><span class="tag">Keyword filters</span><span class="tag">Knowledge graph</span></div>
+      <p>All 443 papers in one place — filter by keyword and year, browse journals, and explore an interactive keyword &amp; paper knowledge graph.</p>
+      <span class="go">Open the explorer →</span>
+    </a>
+
+    <a class="card full dl" href="DBP_master_corpus.xlsx" download>
+      <div class="ic">📑</div>
+      <div>
+        <h2>Master corpus spreadsheet</h2>
+        <p>Every paper with a stable ID (P001–P443), full bibliographic data, and its mapping to parts and types. Sheets: Papers · Types · Parts · Legend.</p>
+        <span class="go">Download the spreadsheet (.xlsx) ↓</span>
+      </div>
+    </a>
+  </div>
+
+  <p class="foot">Each tool is a single, self-contained HTML file — nothing to install, works offline, opens in any modern browser.
+     A standalone version of the <a href="dbp_sos_bicycle.html">bicycle diagram</a> is also included (it is embedded in the framework above).
+     <br><br><b>Note:</b> paper IDs (P001–P443) are shared across all tools and the spreadsheet, so a paper referenced in one place is easy to find in another.</p>
+</div>
+<script>
+  const b=document.getElementById("themeBtn");
+  b.onclick=()=>{const r=document.documentElement;const cur=r.getAttribute("data-theme");
+    const dark=cur? cur==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    r.setAttribute("data-theme", dark?"light":"dark");};
+</script>
+</body>
+</html>
