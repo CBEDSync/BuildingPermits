@@ -18,6 +18,9 @@
   h1{font-size:27px;letter-spacing:-.5px;margin:6px 0 6px}
   .lede{color:var(--muted);font-size:14.5px;max-width:720px;margin:0 0 26px}
   .themebtn{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:38px;height:34px;cursor:pointer;font-size:15px}
+  .home{display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:38px;height:34px;cursor:pointer;text-decoration:none;margin-left:auto}
+  .home+.themebtn{margin-left:8px}
+  .home:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
   .flow{display:flex;flex-direction:column;gap:0}
   .stage{display:grid;grid-template-columns:120px 1fr 300px;gap:16px;align-items:center;position:relative}
   .phase{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:var(--accent);border-radius:8px;padding:10px 8px;text-align:center;align-self:stretch;display:flex;align-items:center;justify-content:center}
@@ -43,6 +46,7 @@
 <body>
 <div class="wrap">
   <div class="top"><span class="dot"></span><span class="kicker">Systematic map · method</span>
+    <a class="home" href="index.html" title="Back to the toolkit home" aria-label="Home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></a>
     <button class="themebtn" id="themeBtn" title="Toggle theme">◐</button></div>
   <h1>PRISMA flow — from search to included studies</h1>
   <p class="lede">How the building‑permitting corpus was identified, screened and narrowed — from 747 database records to the

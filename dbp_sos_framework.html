@@ -26,6 +26,8 @@
   nav.tabs button:hover{color:var(--ink);background:color-mix(in srgb,var(--accent) 8%,transparent)}
   nav.tabs button.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border-color:color-mix(in srgb,var(--accent) 24%,transparent)}
   .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:36px;height:34px;cursor:pointer;font-size:15px}
+.home{display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:36px;height:34px;cursor:pointer;text-decoration:none}
+.home:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
   .wrap{max-width:1400px;margin:0 auto;padding:22px 22px 60px}
   .tab{display:none} .tab.active{display:block}
   .lead{margin-bottom:18px}
@@ -170,6 +172,7 @@
     <button data-tab="graph">Type Graph</button>
     <button data-tab="bike">Bicycle</button>
   </nav>
+  <a class="home" href="index.html" title="Back to the toolkit home" aria-label="Home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></a>
   <button class="theme-btn" id="themeBtn" title="Toggle theme">◐</button>
 </header>
 
