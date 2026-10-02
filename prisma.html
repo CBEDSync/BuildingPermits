@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRISMA Flow — DBP Review</title>
+<style>
+  :root{--bg:#f5f7fa;--panel:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#cbd5e1;--accent:#2563eb;
+    --box:#ffffff;--boxb:#94a3b8;--excl:#fef2f2;--exclb:#f1b0b7;--incl:#ecfdf5;--inclb:#6ee7b7;
+    --band:#eef2f7;--shadow:0 1px 3px rgba(15,23,42,.08),0 8px 24px rgba(15,23,42,.05);}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--panel:#111a2b;--ink:#e6edf7;--muted:#93a4bd;--line:#334867;--box:#111a2b;--boxb:#44597a;--excl:#2a1518;--exclb:#7f3b43;--incl:#0f2a1f;--inclb:#2f7d5b;--band:#16223a;--shadow:0 1px 3px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);}}
+  :root[data-theme="dark"]{--bg:#0b1220;--panel:#111a2b;--ink:#e6edf7;--muted:#93a4bd;--line:#334867;--box:#111a2b;--boxb:#44597a;--excl:#2a1518;--exclb:#7f3b43;--incl:#0f2a1f;--inclb:#2f7d5b;--band:#16223a;--shadow:0 1px 3px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 22px 70px}
+  .top{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .dot{width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:27px;letter-spacing:-.5px;margin:6px 0 6px}
+  .lede{color:var(--muted);font-size:14.5px;max-width:720px;margin:0 0 26px}
+  .themebtn{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:38px;height:34px;cursor:pointer;font-size:15px}
+  .flow{display:flex;flex-direction:column;gap:0}
+  .stage{display:grid;grid-template-columns:120px 1fr 300px;gap:16px;align-items:center;position:relative}
+  .phase{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:var(--accent);border-radius:8px;padding:10px 8px;text-align:center;align-self:stretch;display:flex;align-items:center;justify-content:center}
+  .phase.scr{background:#0d9488}.phase.elig{background:#d97706}.phase.inc{background:#16a34a}
+  .box{background:var(--box);border:1.5px solid var(--boxb);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .box h3{margin:0 0 3px;font-size:15px}
+  .box .n{font-weight:800;color:var(--accent)}
+  .box .sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .box.inc{background:var(--incl);border-color:var(--inclb)}
+  .box.inc h3{font-size:16px}
+  .excl{background:var(--excl);border:1.5px solid var(--exclb);border-radius:10px;padding:11px 13px;font-size:12.5px}
+  .excl b{color:var(--ink)} .excl .n{font-weight:800;color:#b02a37}
+  .excl ul{margin:6px 0 0;padding-left:16px;color:var(--muted)} .excl li{margin:1px 0}
+  .arrow{grid-column:2;justify-self:center;width:2px;height:20px;background:var(--line);position:relative}
+  .arrow:after{content:"";position:absolute;bottom:-1px;left:-4px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid var(--line)}
+  .harrow{position:absolute;top:50%;left:calc(120px + (100% - 120px - 300px - 16px));width:16px;height:2px;background:var(--exclb)}
+  .note{margin-top:30px;font-size:12.5px;color:var(--muted);background:var(--band);border:1px solid var(--line);border-radius:10px;padding:14px 16px;max-width:860px}
+  .note b{color:var(--ink)}
+  a.back{color:var(--accent);text-decoration:none;font-weight:600;font-size:13.5px}
+  @media(max-width:720px){.stage{grid-template-columns:1fr}.phase{writing-mode:horizontal-tb}.excl{grid-column:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="dot"></span><span class="kicker">Systematic map · method</span>
+    <button class="themebtn" id="themeBtn" title="Toggle theme">◐</button></div>
+  <h1>PRISMA flow — from search to included studies</h1>
+  <p class="lede">How the building‑permitting corpus was identified, screened and narrowed — from 747 database records to the
+     105 studies synthesised in this map. Boxes on the right show what was removed at each step and why.</p>
+  <a class="back" href="index.html">← Back to the toolkit</a>
+
+  <div class="flow" style="margin-top:24px">
+    <!-- IDENTIFICATION -->
+    <div class="stage">
+      <div class="phase">Identification</div>
+      <div class="box"><h3>Records identified from databases — <span class="n">n = 747</span></h3>
+        <div class="sub">Scopus 548 · Web of Science 199</div></div>
+      <div class="excl"><b>Excluded at database relevance / publication‑type screening</b> — <span class="n">n = 184</span>
+        <ul><li>Scopus 139</li><li>Web of Science 45</li></ul></div>
+    </div>
+    <div class="arrow"></div>
+    <div class="stage">
+      <div class="phase">Identification</div>
+      <div class="box"><h3>Records retained after database screening — <span class="n">n = 563</span></h3></div>
+      <div class="excl"><b>Duplicate records removed</b> (Scopus ∩ WoS, matched by DOI / title+author+year) — <span class="n">n = 98</span></div>
+    </div>
+    <div class="arrow"></div>
+    <div class="stage">
+      <div class="phase">Identification</div>
+      <div class="box"><h3>Unique records after de‑duplication — <span class="n">n = 465</span></h3></div>
+      <div></div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- SCREENING -->
+    <div class="stage">
+      <div class="phase scr">Screening</div>
+      <div class="box"><h3>Records after removing non‑academic sources — <span class="n">n = 324</span></h3></div>
+      <div class="excl"><b>Non‑academic sources removed</b> — <span class="n">n = 141</span>
+        <ul><li>Journal of Planning &amp; Environment Law 120</li><li>The Planner 11 · Building Engineer 4</li><li>Town &amp; Country Planning 3 · Building Standards 3</li></ul></div>
+    </div>
+    <div class="arrow"></div>
+    <div class="stage">
+      <div class="phase scr">Screening</div>
+      <div class="box"><h3>Records screened on title / abstract against the review scope — <span class="n">n = 324</span></h3></div>
+      <div class="excl"><b>Excluded — permitting incidental / out of scope</b> — <span class="n">n = 198</span>
+        <div class="sub" style="margin-top:4px">permit counts as economic indicators; general land‑use, zoning, housing &amp; environmental studies; legal case notes</div></div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- ELIGIBILITY -->
+    <div class="stage">
+      <div class="phase elig">Eligibility</div>
+      <div class="box"><h3>Reports sought for retrieval (full text) — <span class="n">n = 126</span></h3></div>
+      <div class="excl"><b>Full text not retrieved</b> (no accessible PDF) — <span class="n">n = 10</span>
+        <div class="sub" style="margin-top:4px">kept in the dataset, flagged; included on title/abstract pending retrieval</div></div>
+    </div>
+    <div class="arrow"></div>
+    <div class="stage">
+      <div class="phase elig">Eligibility</div>
+      <div class="box"><h3>Reports assessed for eligibility on full text — <span class="n">n = 116</span></h3></div>
+      <div class="excl"><b>Excluded on full‑text reading</b> — not about the permitting system — <span class="n">n = 21</span>
+        <div class="sub" style="margin-top:4px">e.g. town‑planning / land‑use studies; permit data used only incidentally</div></div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- INCLUDED -->
+    <div class="stage">
+      <div class="phase inc">Included</div>
+      <div class="box inc"><h3>Studies included in the systematic map — <span class="n">n = 105</span></h3>
+        <div class="sub">95 confirmed on full text + 10 included on title/abstract (full text not yet retrieved)</div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <p class="note"><b>Notes.</b> Identification and de‑duplication counts are from the merged Scopus + Web of Science screening workbook
+     (Scopus 548, WoS 199; 106 DOI + 2 title/author/year duplicate pairs). The non‑academic removal, scope screening and full‑text
+     assessment were carried out for this review. Every record remains in <b>DBP_master_corpus.xlsx</b> with its screening decisions,
+     so the funnel is fully auditable and the <i>Include? (your call)</i> column lets any decision be overridden. No references list was
+     available in the exports, so citation networks are not part of this map.</p>
+</div>
+<script>
+  document.getElementById("themeBtn").onclick=()=>{const r=document.documentElement,c=r.getAttribute("data-theme");
+    const d=c?c==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.setAttribute("data-theme",d?"light":"dark");};
+</script>
+</body>
+</html>
