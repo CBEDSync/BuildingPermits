@@ -21,6 +21,8 @@
   .home{display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;width:38px;height:34px;cursor:pointer;text-decoration:none;margin-left:auto}
   .home+.themebtn{margin-left:8px}
   .home:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.dll{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.3px;text-decoration:none;color:#16a34a;border:1px solid color-mix(in srgb,#16a34a 40%,var(--line));border-radius:9px;padding:0 9px;height:34px}
+.dll:hover{background:color-mix(in srgb,#16a34a 12%,transparent)}
   .flow{display:flex;flex-direction:column;gap:0}
   .stage{display:grid;grid-template-columns:120px 1fr 300px;gap:16px;align-items:center;position:relative}
   .phase{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:var(--accent);border-radius:8px;padding:10px 8px;text-align:center;align-self:stretch;display:flex;align-items:center;justify-content:center}
@@ -46,11 +48,12 @@
 <body>
 <div class="wrap">
   <div class="top"><span class="dot"></span><span class="kicker">Systematic map · method</span>
-    <a class="home" href="index.html" title="Back to the toolkit home" aria-label="Home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></a>
+    <a class="dll" style="margin-left:auto" href="DBP_master_corpus.xlsx" download title="Download the master corpus spreadsheet (.xlsx)" aria-label="Download spreadsheet"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>XLSX</a>
+  <a class="home" href="index.html" title="Back to the toolkit home" aria-label="Home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></a>
     <button class="themebtn" id="themeBtn" title="Toggle theme">◐</button></div>
   <h1>PRISMA flow — from search to included studies</h1>
   <p class="lede">How the building‑permitting corpus was identified, screened and narrowed — from 747 database records to the
-     105 studies synthesised in this map. Boxes on the right show what was removed at each step and why.</p>
+     95 studies synthesised in this map. Boxes on the right show what was removed at each step and why.</p>
   <a class="back" href="index.html">← Back to the toolkit</a>
 
   <div class="flow" style="margin-top:24px">
@@ -96,8 +99,8 @@
     <div class="stage">
       <div class="phase elig">Eligibility</div>
       <div class="box"><h3>Reports sought for retrieval (full text) — <span class="n">n = 126</span></h3></div>
-      <div class="excl"><b>Full text not retrieved</b> (no accessible PDF) — <span class="n">n = 10</span>
-        <div class="sub" style="margin-top:4px">kept in the dataset, flagged; included on title/abstract pending retrieval</div></div>
+      <div class="excl"><b>Excluded — full text not retrievable</b> (no accessible PDF) — <span class="n">n = 10</span>
+        <div class="sub" style="margin-top:4px">could not be verified against the scope on full text, so removed from the map</div></div>
     </div>
     <div class="arrow"></div>
     <div class="stage">
@@ -111,8 +114,8 @@
     <!-- INCLUDED -->
     <div class="stage">
       <div class="phase inc">Included</div>
-      <div class="box inc"><h3>Studies included in the systematic map — <span class="n">n = 105</span></h3>
-        <div class="sub">95 confirmed on full text + 10 included on title/abstract (full text not yet retrieved)</div></div>
+      <div class="box inc"><h3>Studies included in the systematic map — <span class="n">n = 95</span></h3>
+        <div class="sub">all 95 confirmed on full‑text reading</div></div>
       <div></div>
     </div>
   </div>

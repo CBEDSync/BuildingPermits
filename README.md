@@ -1,6 +1,6 @@
 # Digital Building Permits — System-of-Systems Toolkit
 
-Interactive tools for understanding the **digital building permit (DBP)** as a *system of systems* — its six parts, the types of methods within each, how they connect, and the research literature (105 in-scope papers, 1978–2026) behind them.
+Interactive tools for understanding the **digital building permit (DBP)** as a *system of systems* — its six parts, the types of methods within each, how they connect, and the research literature (95 in-scope papers, 1986–2026) behind them.
 
 ## Open the tools
 
@@ -11,8 +11,8 @@ Once this repository is published with **GitHub Pages** (see below), the tools o
 | **Landing page** | `index.html` | Hub linking to everything |
 | **System-of-Systems Framework** | `dbp_sos_framework.html` | Concept · The Parts · Relationships · Type Graph · Bicycle |
 | **Literature Explorer** | `dbp_literature_explorer.html` | Dashboard (keyword/year filters) + knowledge graph |
-| **PRISMA flow** | `prisma.html` | Search → screening → full-text → 105 included, with exclusions |
-| **Master corpus spreadsheet** | `DBP_master_corpus.xlsx` | All 105 in-scope papers with IDs, metadata, parts & types |
+| **PRISMA flow** | `prisma.html` | Search → screening → full-text → 95 included, with exclusions |
+| **Master corpus spreadsheet** | `DBP_master_corpus.xlsx` | All 95 in-scope papers with IDs, metadata, parts & types |
 
 Every HTML file is **self-contained** (all code and data inlined) — no build step, no dependencies, works offline.
 
